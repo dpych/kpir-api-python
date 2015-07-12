@@ -3,6 +3,7 @@ __date__ = "$2015-07-11 14:55:09$"
 
 from flask import Flask, jsonify, request
 from flask.ext.sqlalchemy import SQLAlchemy
+from sqlalchemy.ext.declarative import declared_attr
 from core.config import Config, SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO
 from core.controller import response, not_found
 
@@ -23,4 +24,4 @@ Initiatie database SQLAlchemy
 """
 db = SQLAlchemy(app)
 
-from core.model import Model
+from core.model import CoreModel

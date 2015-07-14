@@ -1,6 +1,9 @@
 __author__ = "Dawid Pych <dawidpych@gmailcom>"
 __date__ = "$2015-07-11 14:55:09$"
 
+import sys, os
+sys.path.append(os.path.dirname(os.path.realpath(__file__)))
+
 from flask import Flask, jsonify, request
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.declarative import declared_attr
@@ -12,6 +15,7 @@ app = Flask(__name__)
 """
 Config import
 """
+#app.config.from_object('config')
 app.config.from_object('config')
 
 """

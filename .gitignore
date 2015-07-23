@@ -3,4 +3,4 @@ nbproject
 __pycache__
 versions
 /src/app.db
-/src/db_repository
+/src/db_repository/

@@ -3,15 +3,16 @@ import core
 __author__ = "Dawid Pych <dawidpych@gmailcom>"
 __date__ = "$2015-07-05 15:32:20$"
 
-def response(response = {}, status=200, mimetype=None, page=1, lenght=1000):
-    if status == 200 :
-        success = True;
+
+def response(response={}, status=200, mimetype=None, page=1, lenght=1000):
+    if status == 200:
+        success = True
     else:
         success = False
 
     response = {
-        "data" : response,
-        "success" : success,
+        "data": response,
+        "success": success,
         "page": page,
         "length": lenght
     }

@@ -14,7 +14,7 @@ class CoreModel(TestCase):
     def setUp(self):
         class TestCoreModelClass(core.CoreModel):
             __name__ = 'TestCoreModelClass'
-            pass
+
         self.coreModel = TestCoreModelClass()
 
     def create_app(self):
@@ -40,9 +40,31 @@ class CoreModel(TestCase):
         ids = self.coreModel.id
         self.assertEqual(str(type(ids)), "<class 'sqlalchemy.schema.Column'>")
 
+    def test_attribute_id_is_column_integer(self):
+        ids = self.coreModel.id.type
+        self.assertEqual(str(type(ids)), "<class 'sqlalchemy.types.Integer'>")
+
+    def test_attribute_id_column_is_primary_key(self):
+        ids = self.coreModel.id.primary_key
+        self.assertTrue(ids)
+
     def test_attribute_params_is_column(self):
         params = self.coreModel.params
         self.assertEqual(str(type(params)), "<class 'sqlalchemy.schema.Column'>")
+
+    def test_rename_tablename_to_lower(self):
+        name = self.coreModel.__tablename__
+        self.assertEqual(str(name), 'testcoremodelclass')
+
+    def test_get_params(self):
+        class TestCoreModelClass(core.CoreModel):
+            __name__ = 'TestCoreModelClass'
+            params = '{"data":"test"}'
+
+        coreModel = TestCoreModelClass()
+
+        params = coreModel.get_params()
+        self.assertEqual(params['data'], "test")
 
 
 if __name__ == '__main__':

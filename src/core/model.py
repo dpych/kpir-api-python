@@ -9,13 +9,13 @@ Defauld model for all new models in app
 """
 
 class CoreModel (object):
-    id =  db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     params = db.Column(db.Text)
     __table__ = None
     
     def __init__(self):
         super(self)
-        self.__table__ = cls.__name__.lower()
+        self.__table__ = self.__name__.lower()
     
     @declared_attr
     def __tablename__(cls):

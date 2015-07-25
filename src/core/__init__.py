@@ -37,4 +37,5 @@ from core.model import CoreModel
 Import app modules
 """
 for model in Config.get('MODULES','LIST').split(','):
-    module = __import__('app.'+model, fromlist=['model','controller'])
+    if model:
+        module = __import__('app.'+model, fromlist=['model','controller'])

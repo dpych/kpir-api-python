@@ -1,6 +1,7 @@
-from core import jsonify, db
+from core import db
 from sqlalchemy.ext.declarative import declared_attr
 from abc import ABCMeta
+import json
 
 __author__ = "Dawid Pych <dawidpych@gmailcom>"
 __date__ = "$2015-07-05 14:07:00$"
@@ -25,4 +26,4 @@ class CoreModel (object):
         return cls.__name__.lower()
 
     def get_params(self):
-        return jsonify(self.params)
+        return json.loads(self.params)

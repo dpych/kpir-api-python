@@ -1,3 +1,6 @@
+"""
+Core module for KPIR API Server
+"""
 __author__ = "Dawid Pych <dawidpych@gmailcom>"
 __date__ = "$2015-07-11 14:55:09$"
 

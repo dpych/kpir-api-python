@@ -1,11 +1,11 @@
 import core
-from flask.ext.testing import TestCase
+from test_base import BaseTestCase
 
 __author__ = 'Dawid Pych <dawidpych@gmail.com>'
 __date__ = '19.07.15'
 
 
-class MyTestCase(TestCase):
+class MyTestCase(BaseTestCase):
 
     def create_app(self):
         return core.app

@@ -2,12 +2,11 @@ __author__ = 'Dawid Pych <dawidpych@gmail.com>'
 __date__ = '25.07.2015'
 
 import core
-from flask.ext.testing import TestCase
+from test_base import BaseTestCase
 from abc import ABCMeta
-from flask import json
 
 
-class CoreModel(TestCase):
+class CoreModel(BaseTestCase):
 
     coreModel = None
 
@@ -16,9 +15,6 @@ class CoreModel(TestCase):
             __name__ = 'TestCoreModelClass'
 
         self.coreModel = TestCoreModelClass()
-
-    def create_app(self):
-        return core.app
 
     def test_attribute_metaclass(self):
         metaclass = self.coreModel.__metaclass__

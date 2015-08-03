@@ -1,12 +1,9 @@
 import core
-from flask.ext.testing import TestCase
+from test_base import BaseTestCase
 from flask import json
 
 
-class CoreController_TestCase(TestCase):
-
-    def create_app(self):
-        return core.app
+class CoreController_TestCase(BaseTestCase):
 
     def test_response(self):
         model = {

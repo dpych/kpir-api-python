@@ -1,10 +1,12 @@
 """
 Default abstract models for models in app.
 """
-from core import db
-from sqlalchemy.ext.declarative import declared_attr
 from abc import ABCMeta
 import json
+
+from sqlalchemy.ext.declarative import declared_attr
+
+from kpir.core import db
 
 __author__ = "Dawid Pych <dawidpych@gmailcom>"
 __date__ = "$2015-07-05 14:07:00$"

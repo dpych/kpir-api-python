@@ -9,10 +9,10 @@ import os
 
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
-from flask import Flask, jsonify, request
+from flask import Flask, request, jsonify
 from flask.ext.sqlalchemy import SQLAlchemy
-from core.config import Config, SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO
-from core.controller import response, not_found
+from kpir.core.config import Config
+from kpir.core.controller import not_found
 
 app = Flask(__name__)
 
@@ -34,11 +34,11 @@ db = SQLAlchemy(app)
 """
 Abstract Model for table
 """
-from core.model import CoreModel
+from kpir.core.model import CoreModel
 
 """
 Import app modules
 """
 for model in Config.get('MODULES','LIST').split(','):
     if model:
-        module = __import__('app.'+model, fromlist=['model','controller'])
+        module = __import__('app.'+ model, fromlist=['model','controller'])

@@ -1,6 +1,7 @@
-import core
-from test_base import BaseTestCase
 from flask import json
+
+import kpir.core as core
+from test_base import BaseTestCase
 
 
 class CoreController_TestCase(BaseTestCase):

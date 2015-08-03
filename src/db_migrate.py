@@ -4,9 +4,10 @@ __author__ = "Dawid Pych <dawidpych@gmailcom>"
 __date__ = "$2015-07-05 15:07:05$"
 
 import imp
+
 from migrate.versioning import api
-from core import db
-from core.config import SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO
+from kpir.core import db
+from kpir.core.config import SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO
 
 v = api.db_version(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO)
 migration = SQLALCHEMY_MIGRATE_REPO + ('/versions/%03d_migration.py' % (v+1))

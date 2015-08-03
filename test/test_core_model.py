@@ -1,9 +1,10 @@
 __author__ = 'Dawid Pych <dawidpych@gmail.com>'
 __date__ = '25.07.2015'
 
-import core
-from test_base import BaseTestCase
 from abc import ABCMeta
+
+from kpir import core
+from test_base import BaseTestCase
 
 
 class CoreModel(BaseTestCase):

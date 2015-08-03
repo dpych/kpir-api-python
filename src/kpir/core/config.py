@@ -3,7 +3,8 @@ Module for import config from config.ini file.
 """
 
 import configparser
-from core import os
+
+from kpir.core import os
 
 __author__="Dawid Pych <dawidpych@gmailcom>"
 __date__ ="$2015-07-05 12:34:07$"
@@ -11,13 +12,16 @@ __date__ ="$2015-07-05 12:34:07$"
 """
 Path to root folder.
 """
-BASE_PATH = os.path.dirname(os.path.realpath(__file__)) + '/../'
+DEV_PATH = '/opt/kpir/'
+BASE_PATH = os.path.dirname(os.path.realpath(__file__)) + '/../../'
 
 """
 Path to config.ini file.
 """
-file = BASE_PATH + 'config.ini'
-
+if os.getenv('KPIR_DEV', False) :
+    file = BASE_PATH + 'config.ini'
+else:
+    file = DEV_PATH + 'config.ini'
 
 """
 Reading config.ini file

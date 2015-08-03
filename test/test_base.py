@@ -1,7 +1,7 @@
 __author__ = "Dawid Pych <dawidpych@gmailcom>"
 __date__ = "$2015-08-03 10:31:00$"
 
-import core
+from kpir import core
 from flask.ext.testing import TestCase
 
 class BaseTestCase(TestCase):

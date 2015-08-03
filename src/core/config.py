@@ -14,7 +14,7 @@ Path to root folder.
 BASE_PATH = os.path.dirname(os.path.realpath(__file__)) + '/../'
 
 """
-Patch to config.ini file.
+Path to config.ini file.
 """
 file = BASE_PATH + 'config.ini'
 

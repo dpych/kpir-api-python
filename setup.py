@@ -1,25 +1,34 @@
 #!/usr/bin/python3
-import os
-import sys
+
+__author__ = "Dawid Pych <dawidpych@gmailcom>"
+__date__ = "$2015-08-04 15:28:03$"
+
 from setuptools import setup
 
-data_dir = os.path.dirname(os.path.realpath(__file__))
-
-print(data_dir)
-print(os.path.join(sys.prefix,'opt','kpir'))
-
-setup(
+setup (
     name='KPIR API',
     version='0.1',
-    packages=['kpir', 'kpir.core'],
+    packages=['kpir','kpir.core'],
     package_dir={'': 'src'},
-    url='',
-    license='',
+    install_requires=[
+        'Flask>=0.10',
+        'Flask-SQLAlchemy>=1.0',
+        'Flask-Testing>=0.4',
+        'SQLAlchemy>=0.8'
+    ],
+
     author='Dawid Pych',
-    author_email='dawidpych@gmail.com',
+    author_email='dawidpych@gmailcom',
+
+    summary='Just another Python package for the cheese shop',
+    
+    url='http://projectweb.ovh/',
+    license='',
     description='',
-    install_requires=['flask'],
+    long_description='Long description of the package',
+    
     data_files=[
-        ('opt',[os.path.join(data_dir, '/src/test.txt')])
+        ('/opt/kpir',['src/config.ini','src/run.py','src/db_create.py','src/db_migrate.py'])
     ]
+# could also include long_description, download_url, classifiers, etc.  
 )

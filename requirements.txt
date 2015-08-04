@@ -1,0 +1,4 @@
+Flask>=0.10
+Flask-SQLAlchemy>=1.0
+Flask-Testing>=0.4
+SQLAlchemy>=0.8

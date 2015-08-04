@@ -1,0 +1,7 @@
+include src/config.ini
+include src/db_create.py
+include src/db_migrate.py
+include src/run.py
+include README.rst
+include requirements.txt
+include README.md

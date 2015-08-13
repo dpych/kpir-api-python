@@ -1,7 +1,7 @@
 """
 Controller Core.
 """
-from flask import request, jsonify
+from flask import request, jsonify, json
 
 __author__ = "Dawid Pych <dawidpych@gmailcom>"
 __date__ = "$2015-07-05 15:32:20$"
@@ -49,3 +49,29 @@ def not_found(error=None):
     resp.status_code = 404
 
     return resp
+
+
+def crud(model, id):
+
+    if request.data:
+        s = json.loads(request.data)
+    else:
+        s = None
+
+    if request.method == 'GET':
+        model = model.query.get(id)
+        return response(response=model, lenght=(getattr(model, 'id', False) if 1 else 0))
+    elif request.method == 'POST':
+        model = model().add_row(s)
+        return response(model.serialize)
+    elif request.method == 'PUT':
+        if s:
+            s['id'] = id
+        model = model().edit_row(s)
+        return response(response=model.serialize, lenght=0)
+    elif request.method == 'DELETE':
+        if id:
+            ret = model().delete_row(id)
+        else:
+            ret = False
+        return response({'action': {'remove': ret}}, lenght=0)

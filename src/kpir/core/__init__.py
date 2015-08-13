@@ -41,4 +41,4 @@ Import app modules
 """
 for model in Config.get('MODULES','LIST').split(','):
     if model:
-        module = __import__('app.'+ model, fromlist=['model','controller'])
+        module = __import__('kpir.app.'+ model, fromlist=['model','controller'])

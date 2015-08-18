@@ -63,6 +63,72 @@ class CoreModel(BaseTestCase):
         params = coreModel.get_params()
         self.assertEqual(params['data'], "test")
 
+    def test_serialize(self):
+
+        class TestClassModel(core.db.Model, core.CoreModel):
+            pass
+
+        core.db.create_all()
+
+        testClass = TestClassModel(id=1, params='{"test":1}')
+
+        ser = testClass.serialize
+
+        self.assertEqual(ser['id'], 1)
+        self.assertEqual(ser['params'], dict(test=1))
+
+
+    def test_add_row(self):
+
+        class TestClassModel2(core.db.Model, core.CoreModel):
+            pass
+
+        core.db.create_all()
+
+        testClass = TestClassModel2()
+
+        testClass.add_row(dict(id=2))
+
+        ser = testClass.serialize
+
+        self.assertEqual(ser['id'], 2)
+        self.assertIsNone(ser['params'])
+
+    def test_edit_row(self):
+
+        class TestClassModel3(core.db.Model, core.CoreModel):
+            pass
+
+        core.db.create_all()
+
+        testClass = TestClassModel3()
+
+        testClass.add_row(dict(id=2, params='{}'))
+        testClass.edit_row(dict(id=2, params='{test: 1}'))
+
+        testClass = TestClassModel3.query.get(2)
+
+        ser = testClass.serialize
+
+        self.assertEqual(ser['id'], 2)
+        self.assertEqual(ser['params'], '{test: 1}')
+
+    def test_edit_row(self):
+
+        class TestClassModel3(core.db.Model, core.CoreModel):
+            pass
+
+        core.db.create_all()
+
+        testClass = TestClassModel3()
+
+        testClass.add_row(dict(id=2, params='{}'))
+        testClass.delete_row(2)
+
+        testClass = TestClassModel3.query.get(2)
+
+        self.assertIsNone(getattr(testClass, 'id', None))
+        self.assertIsNone(getattr(testClass, 'params', None))
 
 if __name__ == '__main__':
     unittest.main()

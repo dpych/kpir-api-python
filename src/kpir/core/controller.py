@@ -53,25 +53,41 @@ def not_found(error=None):
 
 def crud(model, id):
 
+    global request
+
     if request.data:
-        s = json.loads(request.data)
+        s = request.get_json()
     else:
         s = None
 
     if request.method == 'GET':
-        model = model.query.get(id)
-        return response(response=model, lenght=(getattr(model, 'id', False) if 1 else 0))
+        model = model().query.get(id)
+        if model is not None:
+            return response(model.serialize, lenght=(getattr(model, 'id', False) if 1 else 0))
+        else:
+            return response(None, lenght=0)
     elif request.method == 'POST':
-        model = model().add_row(s)
-        return response(model.serialize)
+        if s:
+            model = model()
+            model = model.add_row(s)
+            return response(model.serialize, lenght=1)
+        else:
+            return response({}, status=403)
     elif request.method == 'PUT':
         if s:
             s['id'] = id
         model = model().edit_row(s)
-        return response(response=model.serialize, lenght=0)
+        if model is not None:
+            return response(model.serialize, lenght=(getattr(model, 'id', False) if 1 else 0))
+        else:
+            return response(None, lenght=0)
     elif request.method == 'DELETE':
         if id:
             ret = model().delete_row(id)
+            if not ret:
+                r = True
+            else:
+                r = False
         else:
-            ret = False
-        return response({'action': {'remove': ret}}, lenght=0)
+            r = False
+        return response({'action': {'remove': r}}, lenght=0)

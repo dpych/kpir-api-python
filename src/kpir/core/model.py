@@ -61,7 +61,10 @@ class CoreModel(object):
         """
         ret = {}
         for column in self.__table__.columns:
-            ret[column.name] = getattr(self, column.name)
+            if column.name == 'params' and getattr(self, column.name) and getattr(self, column.name) != '':
+                ret[column.name] = json.loads(getattr(self, column.name, '{}'))
+            else:
+                ret[column.name] = getattr(self, column.name)
         return ret
 
     def add_row(self, data):
@@ -77,9 +80,11 @@ class CoreModel(object):
             for k in self.__table__.columns:
                 name = getattr(k, 'name')
                 required = not getattr(k, 'nullable')
-
                 if name in data:
-                    setattr(self, name, data.get(name))
+                    if name == 'params':
+                        setattr(self, name, json.dumps(data.get(name)))
+                    else:
+                        setattr(self, name, data.get(name))
                 else:
                     if required and name != 'id':
                         save = False
@@ -105,11 +110,13 @@ class CoreModel(object):
                 required = not getattr(k, 'nullable')
 
                 if name in data:
-                    setattr(self, name, data.get(name))
+                    if name == 'params':
+                        setattr(self, name, json.dumps(data.get(name)))
+                    else:
+                        setattr(self, name, data.get(name))
                 else:
                     if required:
                         save = False
-
             if save:
                 db.session.commit()
 

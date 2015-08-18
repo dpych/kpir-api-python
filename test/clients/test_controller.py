@@ -12,6 +12,13 @@ class ClientController_TestCase(BaseTestCase):
 
         self.assert200(rp)
 
+    def test_clients_query(self):
+        rp = self.client.get('/clients/?page=5&limit=2')
+        data = json.loads(rp.data)
+
+        self.assert200(rp)
+        self.assertEqual(data['page'], 5)
+
     def test_method_get_only_clients(self):
         get = self.client.get('/clients/')
         post = self.client.post('/clients/')
@@ -51,7 +58,7 @@ class ClientController_TestCase(BaseTestCase):
     def test_post_create_client(self):
         rp = self.client.post('/client/')
 
-        self.assert200(rp)
+        self.assert403(rp)
 
     def test_post_client(self):
         rp = self.client.post('/client/1')

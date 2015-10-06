@@ -9,7 +9,7 @@ class Clients(db.Model, CoreModel):
 
     shortname = db.Column(db.String(64), index=True, unique=True)
 
-    nip = db.Column(db.Integer(11), nullable=False)
+    nip = db.Column(db.Integer, nullable=False)
 
     address = db.Column(db.String(255))
 

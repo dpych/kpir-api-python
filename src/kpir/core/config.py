@@ -23,6 +23,8 @@ if os.getenv('KPIR_DEV', False) :
 else:
     file = DEV_PATH + 'config.ini'
 
+
+print(file)
 """
 Reading config.ini file
 """

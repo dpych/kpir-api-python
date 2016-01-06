@@ -5,7 +5,7 @@ __date__ = "$2015-07-05 14:16:38$"
 
 import os.path
 
-from kpir.core.config import SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO
+from kpir.core.config import SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO, Config
 from kpir.core import db
 from migrate.versioning import api
 

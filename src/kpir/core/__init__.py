@@ -13,6 +13,7 @@ from flask import Flask, request, jsonify
 from flask.ext.sqlalchemy import SQLAlchemy
 from kpir.core.config import Config
 from kpir.core.controller import not_found
+import os.path
 
 app = Flask(__name__)
 
@@ -41,4 +42,4 @@ Import app modules
 """
 for model in Config.get('MODULES','LIST').split(','):
     if model:
-        module = __import__('kpir.app.'+ model, fromlist=['model','controller'])
+       module = __import__('kpir.app.' + model, fromlist=['model', 'controller'])
